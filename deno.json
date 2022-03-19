@@ -12,5 +12,8 @@
     "jsx": "react"
   },
   "lint": {},
-  "format": {}
+  "format": {},
+  "tasks": {
+    "dev": "doppler run -- aleph dev"
+  }
 }
