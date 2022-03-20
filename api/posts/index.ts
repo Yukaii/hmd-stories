@@ -18,8 +18,6 @@ const getPosts: APIHandler = async ({ response }) => {
 const createPost: APIHandler = async ({ request, response }) => {
   const body: CreatePostPayload = await request.json()
 
-  console.log(body)
-
   const { userpath, content, variant } = body;
 
   const { data } = await getQueryBuilder('posts').insert({
@@ -44,11 +42,12 @@ export const handler: APIHandler = async (context) => {
   switch (request.method) {
     case 'GET': {
       await getPosts(context);
+      break
     }
 
     case 'POST': {
-      console.log('shit')
       await createPost(context);
+      break
     }
 
     default:
