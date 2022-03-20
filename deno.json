@@ -11,8 +11,23 @@
     ],
     "jsx": "react"
   },
-  "lint": {},
-  "format": {},
+  "lint": {
+    "files": {
+      "exclude": [
+        ".aleph"
+      ]
+    }
+  },
+  "fmt": {
+    "files": {
+      "exclude": [
+        ".aleph"
+      ]
+    },
+    "options": {
+      "singleQuote": true
+    }
+  },
   "tasks": {
     "dev": "doppler run -- aleph dev"
   }
