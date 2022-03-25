@@ -7,7 +7,9 @@ export default function App(
     <main>
       <head>
         <meta name='viewport' content='width=device-width' />
+        <link rel='stylesheet' href='./style/index.css' />
       </head>
+
       <Page {...pageProps} />
     </main>
   );
