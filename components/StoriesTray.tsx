@@ -1,19 +1,9 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 
 import Story from '~/components/Story.tsx';
-import { useSprings, animated, to as interpolate } from 'react-spring';
+import { useSprings, animated } from 'react-spring';
 import { Post } from '../types/index.ts';
 import useWindowSize from '../lib/hooks/useWindowSize.ts';
-
-const longText = `Flow 4 hours ago | next
-
-I really miss a consistent user experience. A core idea that I as a user can rely on to predict how a new app will work. I was in awe when I discovered as a kid that user interface were a research area. Things like Fitt's Law and so on. It was not just opinion.
-Today I get the feeling it's mostly just opinion. Either the designer's opinion or the wish to copy the look of something.
-
-Whenever I see a hamburger menu I silently think "Here someone has given up".
-
-And there are a lot of behaviors that are not functioning well.
-`;
 
 const calculateCardSizeFromViewPort = (
   viewportWidth: number,
@@ -149,6 +139,7 @@ export default function StoriesTray({ stories }: { stories: Post[] }) {
     return null;
   }
 
+  const isTransition = useRef(false);
   const [viewIndex, setViewIndex] = React.useState(0);
   const visibleStories = getStoryWindow(stories, viewIndex);
 
@@ -163,13 +154,11 @@ export default function StoriesTray({ stories }: { stories: Post[] }) {
     viewportWidth,
     viewportHeight,
   );
-  const {
-    gapNum,
-    previewCardNum,
-    gapWidth,
-    previewCardWidth,
-    previewCardHeight,
-  } = getPreviewInfo(viewportWidth, viewportHeight, cardWidth);
+  const { gapWidth, previewCardWidth, previewCardHeight } = getPreviewInfo(
+    viewportWidth,
+    viewportHeight,
+    cardWidth,
+  );
 
   const centerX = viewportWidth / 2;
   const centerY = viewportHeight / 2;
@@ -202,7 +191,7 @@ export default function StoriesTray({ stories }: { stories: Post[] }) {
       from: {
         x: centerX + translateX,
         y: centerY + translateY,
-        scale,
+        scale
       },
     };
   };
@@ -210,36 +199,47 @@ export default function StoriesTray({ stories }: { stories: Post[] }) {
   const [springs, api] = useSprings(
     visibleStories.length,
     getTransformFromIndex,
-    [viewportWidth, viewportHeight, previewCardWidth, previewCardHeight],
+    [
+      viewportWidth,
+      viewportHeight,
+      previewCardWidth,
+      previewCardHeight,
+      cardWidth,
+      cardHeight,
+    ],
   );
 
   useEffect(() => {
     api.start(getTransformFromIndex);
-  }, [viewportHeight, viewportWidth]);
+  });
 
   const navigateNext = useCallback(() => {
-    if (hasNext) {
+    if (hasNext && !isTransition.current) {
+      isTransition.current = true;
       api.start((i: number) => getTransformFromIndex(i - 1).from);
 
       window.setTimeout(() => {
+        api.stop();
         setViewIndex(viewIndex + 1);
-        window.setTimeout(() => {
-          api.start(getTransformFromIndex);
-        }, 200);
-      }, 200);
+        api.start(getTransformFromIndex);
+
+        isTransition.current = false;
+      }, 500);
     }
   }, [hasNext, viewIndex]);
 
   const navigatePrev = useCallback(() => {
-    if (hasPrev) {
+    if (hasPrev && !isTransition.current) {
+      isTransition.current = true;
       api.start((i: number) => getTransformFromIndex(i + 1).from);
 
       window.setTimeout(() => {
+        api.stop();
         setViewIndex(viewIndex - 1);
-        window.setTimeout(() => {
-          api.start(getTransformFromIndex);
-        }, 200);
-      }, 200);
+        api.start(getTransformFromIndex);
+
+        isTransition.current = false;
+      }, 500);
     }
   }, [hasPrev, viewIndex]);
 
@@ -254,13 +254,18 @@ export default function StoriesTray({ stories }: { stories: Post[] }) {
 
         return (
           <animated.div
-            className="bg-white rounded fixed origin-top-left"
+            className="bg-white rounded fixed origin-top-left text-gray-900"
             style={{
+              color: 'black',
               width: cardWidth,
               height: cardHeight,
               ...style,
             }}
-          />
+          >
+            #{story.id}
+            <br />
+            {story.content}
+          </animated.div>
         );
       })}
 
