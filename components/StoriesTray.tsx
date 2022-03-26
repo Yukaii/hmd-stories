@@ -1,6 +1,6 @@
 import React from 'react';
 import Story from '~/components/Story.tsx';
-import { animated, useSpring } from 'react-spring';
+import { useSprings, animated, to as interpolate } from 'react-spring';
 import { Post } from '../types/index.ts';
 import useWindowSize from '../lib/hooks/useWindowSize.ts';
 
@@ -78,11 +78,55 @@ const getPreviewInfo = (
     gapNum,
     gapWidth,
     previewCardWidth,
+    previewCardHeight: previewCardWidth * 1.8,
   };
 };
 
+const WINDOW_SIZE = 7;
+const MIDDLE_INDEX = Math.floor(WINDOW_SIZE / 2); // 3
+const getStoryWindow = (stories: Post[], viewIndex: number) => {
+  const offset = Math.ceil((WINDOW_SIZE - 1) / 2);
+
+  return new Array(WINDOW_SIZE).fill(0).map((_, i) => {
+    return stories[viewIndex + i - offset];
+  });
+};
+
+const getTranslateXFromCenter = (
+  index: number,
+  cardWidth: number,
+  gapWidth: number,
+  previewCardWidth: number,
+) => {
+  const centerCardX = -cardWidth / 2;
+  const offset = index - MIDDLE_INDEX;
+
+  if (offset <= 0) {
+    return centerCardX + (offset * previewCardWidth + offset * gapWidth);
+  } else {
+    return -centerCardX + ((offset - 1) * previewCardWidth + offset * gapWidth);
+  }
+};
+
+const getTranslateYFromCenter = (
+  index: number,
+  previewCardHeight: number,
+  cardHeight: number,
+) => {
+  if (index === MIDDLE_INDEX) {
+    return -cardHeight / 2;
+  } else {
+    return -previewCardHeight / 2;
+  }
+};
+
 export default function StoriesTray({ stories }: { stories: Post[] }) {
+  if (stories.length === 0) {
+    return null;
+  }
+
   const [viewIndex, setViewIndex] = React.useState(0);
+  const visibleStories = getStoryWindow(stories, viewIndex);
 
   // Do instagram like transition
   const { width: viewportWidth, height: viewportHeight } = useWindowSize();
@@ -95,28 +139,50 @@ export default function StoriesTray({ stories }: { stories: Post[] }) {
     viewportWidth,
     viewportHeight,
   );
-  const { gapNum, previewCardNum, gapWidth, previewCardWidth } = getPreviewInfo(
-    viewportWidth,
-    viewportHeight,
-    cardWidth,
-  );
+  const {
+    gapNum,
+    previewCardNum,
+    gapWidth,
+    previewCardWidth,
+    previewCardHeight,
+  } = getPreviewInfo(viewportWidth, viewportHeight, cardWidth);
 
-  if (stories.length === 0) {
-    return null;
-  }
+  const centerX = viewportWidth / 2;
+  const centerY = viewportHeight / 2;
 
   return (
     <div className="flex h-full w-full fixed top-0 left-0 bg-black-brand overflow-hidden">
-      <div
-        className="bg-white rounded fixed origin-top-left"
-        style={{
-          width: cardWidth,
-          height: cardHeight,
-          transform: `translate(${viewportWidth / 2 - cardWidth / 2}px, ${
-            viewportHeight / 2 - cardHeight / 2
-          }px)`,
-        }}
-      ></div>
+      {visibleStories.map((story, i) => {
+        const translateX = getTranslateXFromCenter(
+          i,
+          cardWidth,
+          gapWidth,
+          previewCardWidth,
+        );
+
+        const translateY = getTranslateYFromCenter(
+          i,
+          previewCardHeight,
+          cardHeight,
+        );
+
+        const scale = i === MIDDLE_INDEX ? 1 : previewCardWidth / cardWidth;
+
+        const transform = `translate(${centerX + translateX}px, ${
+          centerY + translateY
+        }px) scale(${scale})`;
+
+        return (
+          <div
+            className="bg-white rounded fixed origin-top-left"
+            style={{
+              width: cardWidth,
+              height: cardHeight,
+              transform,
+            }}
+          />
+        );
+      })}
 
       {/* <Story markdown={`# hello world\n yes I can.....`} /> */}
     </div>
