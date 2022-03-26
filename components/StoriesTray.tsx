@@ -254,12 +254,19 @@ export default function StoriesTray({ stories }: { stories: Post[] }) {
 
         return (
           <animated.div
-            className="bg-white rounded fixed origin-top-left text-gray-900"
+            className="bg-white rounded fixed origin-top-left text-gray-900 cursor-pointer"
             style={{
               color: 'black',
               width: cardWidth,
               height: cardHeight,
               ...style,
+            }}
+            onClick={() => {
+              if (i > MIDDLE_INDEX) {
+                navigateNext();
+              } else if (i < MIDDLE_INDEX) {
+                navigatePrev();
+              }
             }}
           >
             #{story.id}
