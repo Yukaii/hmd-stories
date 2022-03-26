@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 
 import Story from '~/components/Story.tsx';
 import { useSprings, animated, to as interpolate } from 'react-spring';
@@ -182,15 +182,64 @@ export default function StoriesTray({ stories }: { stories: Post[] }) {
   );
   const hasPrev = useMemo(() => viewIndex > 0, [viewIndex]);
 
+  const getTransformFromIndex = (i: number) => {
+    const translateX = getTranslateXFromCenter(
+      i,
+      cardWidth,
+      gapWidth,
+      previewCardWidth,
+    );
+
+    const translateY = getTranslateYFromCenter(
+      i,
+      previewCardHeight,
+      cardHeight,
+    );
+
+    const scale = i === MIDDLE_INDEX ? 1 : previewCardWidth / cardWidth;
+
+    return {
+      from: {
+        x: centerX + translateX,
+        y: centerY + translateY,
+        scale,
+      },
+    };
+  };
+
+  const [springs, api] = useSprings(
+    visibleStories.length,
+    getTransformFromIndex,
+    [viewportWidth, viewportHeight, previewCardWidth, previewCardHeight],
+  );
+
+  useEffect(() => {
+    api.start(getTransformFromIndex);
+  }, [viewportHeight, viewportWidth]);
+
   const navigateNext = useCallback(() => {
     if (hasNext) {
-      setViewIndex(viewIndex + 1);
+      api.start((i: number) => getTransformFromIndex(i - 1).from);
+
+      window.setTimeout(() => {
+        setViewIndex(viewIndex + 1);
+        window.setTimeout(() => {
+          api.start(getTransformFromIndex);
+        }, 200);
+      }, 200);
     }
   }, [hasNext, viewIndex]);
 
   const navigatePrev = useCallback(() => {
     if (hasPrev) {
-      setViewIndex(viewIndex - 1);
+      api.start((i: number) => getTransformFromIndex(i + 1).from);
+
+      window.setTimeout(() => {
+        setViewIndex(viewIndex - 1);
+        window.setTimeout(() => {
+          api.start(getTransformFromIndex);
+        }, 200);
+      }, 200);
     }
   }, [hasPrev, viewIndex]);
 
@@ -201,32 +250,15 @@ export default function StoriesTray({ stories }: { stories: Post[] }) {
           return null;
         }
 
-        const translateX = getTranslateXFromCenter(
-          i,
-          cardWidth,
-          gapWidth,
-          previewCardWidth,
-        );
-
-        const translateY = getTranslateYFromCenter(
-          i,
-          previewCardHeight,
-          cardHeight,
-        );
-
-        const scale = i === MIDDLE_INDEX ? 1 : previewCardWidth / cardWidth;
-
-        const transform = `translate(${centerX + translateX}px, ${
-          centerY + translateY
-        }px) scale(${scale})`;
+        const style = springs[i];
 
         return (
-          <div
+          <animated.div
             className="bg-white rounded fixed origin-top-left"
             style={{
               width: cardWidth,
               height: cardHeight,
-              transform,
+              ...style,
             }}
           />
         );
@@ -271,8 +303,6 @@ export default function StoriesTray({ stories }: { stories: Post[] }) {
           />
         </div>
       )}
-
-      {/* <Story markdown={`# hello world\n yes I can.....`} /> */}
     </div>
   );
 }
