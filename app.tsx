@@ -8,6 +8,7 @@ export default function App(
       <head>
         <meta name='viewport' content='width=device-width' />
         <link rel='stylesheet' href='./style/index.css' />
+        <link rel="stylesheet" href="./style/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossOrigin="anonymous" referrerPolicy="no-referrer"  />
       </head>
 
       <Page {...pageProps} />

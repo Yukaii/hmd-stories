@@ -120,6 +120,29 @@ const getTranslateYFromCenter = (
   }
 };
 
+const DEFAULT_TRANSITION_BUTTON_SIZE = 24;
+const getTransitionButtonSizeAndCoord = (
+  cardWidth: number,
+  gapWidth: number,
+) => {
+  const maxButtonSize = gapWidth * 0.7;
+  const buttonSize =
+    DEFAULT_TRANSITION_BUTTON_SIZE > maxButtonSize
+      ? maxButtonSize
+      : DEFAULT_TRANSITION_BUTTON_SIZE;
+
+  const buttonGap = (gapWidth - buttonSize) / 2;
+  const buttonXOffset = Math.abs(-cardWidth / 2 - buttonGap - buttonSize);
+  const buttonYOffset = buttonSize / 2;
+
+  return {
+    size: buttonSize,
+    x: buttonXOffset,
+    y: buttonYOffset,
+    gap: buttonGap,
+  };
+};
+
 export default function StoriesTray({ stories }: { stories: Post[] }) {
   if (stories.length === 0) {
     return null;
@@ -150,9 +173,11 @@ export default function StoriesTray({ stories }: { stories: Post[] }) {
   const centerX = viewportWidth / 2;
   const centerY = viewportHeight / 2;
 
+  const buttonCoord = getTransitionButtonSizeAndCoord(cardWidth, gapWidth);
+
   return (
     <div className="flex h-full w-full fixed top-0 left-0 bg-black-brand overflow-hidden">
-      {visibleStories.map((story, i) => {
+      {visibleStories.map((_, i) => {
         const translateX = getTranslateXFromCenter(
           i,
           cardWidth,
@@ -183,6 +208,40 @@ export default function StoriesTray({ stories }: { stories: Post[] }) {
           />
         );
       })}
+
+      <div
+        className="flex items-center justify-center cursor-pointer fixed"
+        style={{
+          transform: `translate(${centerX - buttonCoord.x}px, ${
+            centerY - buttonCoord.y
+          }px)`,
+          width: buttonCoord.size,
+          height: buttonCoord.size,
+          fontSize: buttonCoord.size,
+        }}
+      >
+        <i
+          className="fa fa-chevron-circle-left text-white"
+          aria-hidden="true"
+        />
+      </div>
+
+      <div
+        className="flex items-center justify-center cursor-pointer fixed"
+        style={{
+          transform: `translate(${
+            centerX + cardWidth / 2 + buttonCoord.gap
+          }px, ${centerY - buttonCoord.y}px)`,
+          width: buttonCoord.size,
+          height: buttonCoord.size,
+          fontSize: buttonCoord.size,
+        }}
+      >
+        <i
+          className="fa fa-chevron-circle-right text-white"
+          aria-hidden="true"
+        />
+      </div>
 
       {/* <Story markdown={`# hello world\n yes I can.....`} /> */}
     </div>
