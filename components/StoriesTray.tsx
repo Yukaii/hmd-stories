@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
+
 import Story from '~/components/Story.tsx';
 import { useSprings, animated, to as interpolate } from 'react-spring';
 import { Post } from '../types/index.ts';
@@ -175,9 +176,31 @@ export default function StoriesTray({ stories }: { stories: Post[] }) {
 
   const buttonCoord = getTransitionButtonSizeAndCoord(cardWidth, gapWidth);
 
+  const hasNext = useMemo(
+    () => viewIndex < stories.length - 1,
+    [viewIndex, stories],
+  );
+  const hasPrev = useMemo(() => viewIndex > 0, [viewIndex]);
+
+  const navigateNext = useCallback(() => {
+    if (hasNext) {
+      setViewIndex(viewIndex + 1);
+    }
+  }, [hasNext, viewIndex]);
+
+  const navigatePrev = useCallback(() => {
+    if (hasPrev) {
+      setViewIndex(viewIndex - 1);
+    }
+  }, [hasPrev, viewIndex]);
+
   return (
     <div className="flex h-full w-full fixed top-0 left-0 bg-black-brand overflow-hidden">
-      {visibleStories.map((_, i) => {
+      {visibleStories.map((story, i) => {
+        if (!story) {
+          return null;
+        }
+
         const translateX = getTranslateXFromCenter(
           i,
           cardWidth,
@@ -209,39 +232,45 @@ export default function StoriesTray({ stories }: { stories: Post[] }) {
         );
       })}
 
-      <div
-        className="flex items-center justify-center cursor-pointer fixed"
-        style={{
-          transform: `translate(${centerX - buttonCoord.x}px, ${
-            centerY - buttonCoord.y
-          }px)`,
-          width: buttonCoord.size,
-          height: buttonCoord.size,
-          fontSize: buttonCoord.size,
-        }}
-      >
-        <i
-          className="fa fa-chevron-circle-left text-white"
-          aria-hidden="true"
-        />
-      </div>
+      {hasPrev && (
+        <div
+          className="flex items-center justify-center cursor-pointer fixed"
+          style={{
+            transform: `translate(${centerX - buttonCoord.x}px, ${
+              centerY - buttonCoord.y
+            }px)`,
+            width: buttonCoord.size,
+            height: buttonCoord.size,
+            fontSize: buttonCoord.size,
+          }}
+          onClick={navigatePrev}
+        >
+          <i
+            className="fa fa-chevron-circle-left text-white"
+            aria-hidden="true"
+          />
+        </div>
+      )}
 
-      <div
-        className="flex items-center justify-center cursor-pointer fixed"
-        style={{
-          transform: `translate(${
-            centerX + cardWidth / 2 + buttonCoord.gap
-          }px, ${centerY - buttonCoord.y}px)`,
-          width: buttonCoord.size,
-          height: buttonCoord.size,
-          fontSize: buttonCoord.size,
-        }}
-      >
-        <i
-          className="fa fa-chevron-circle-right text-white"
-          aria-hidden="true"
-        />
-      </div>
+      {hasNext && (
+        <div
+          className="flex items-center justify-center cursor-pointer fixed"
+          style={{
+            transform: `translate(${
+              centerX + cardWidth / 2 + buttonCoord.gap
+            }px, ${centerY - buttonCoord.y}px)`,
+            width: buttonCoord.size,
+            height: buttonCoord.size,
+            fontSize: buttonCoord.size,
+          }}
+          onClick={navigateNext}
+        >
+          <i
+            className="fa fa-chevron-circle-right text-white"
+            aria-hidden="true"
+          />
+        </div>
+      )}
 
       {/* <Story markdown={`# hello world\n yes I can.....`} /> */}
     </div>
