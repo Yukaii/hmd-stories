@@ -72,40 +72,23 @@ const Avatar = ({
   );
 };
 
-const BackgroundEllipseOne = ({
+const BackgroundEllipse = ({
   style,
   className,
+  background,
+  opacity,
 }: {
   style?: React.StyleHTMLAttributes<HTMLDivElement>['style'];
   className?: string;
+  background: string;
+  opacity: number;
 }) => {
   return (
     <div
       className={cx('block', className)}
       style={{
-        background:
-          'radial-gradient(50% 50% at 50% 50%, rgba(27, 63, 156, 0.56) 0%, rgba(27, 63, 156, 0) 100%)',
-        opacity: 0.91,
-        ...style,
-      }}
-    ></div>
-  );
-};
-
-const BackgroundEllipseTwo = ({
-  style,
-  className,
-}: {
-  style: React.StyleHTMLAttributes<HTMLDivElement>['style'];
-  className?: string;
-}) => {
-  return (
-    <div
-      className={cx('block', className)}
-      style={{
-        background:
-          'radial-gradient(50% 50% at 50% 50%, rgba(156, 27, 58, 0.56) 0%, rgba(142, 21, 101, 0) 100%)',
-        opacity: 0.56,
+        background,
+        opacity,
         ...style,
       }}
     ></div>
@@ -124,7 +107,9 @@ export default function Home() {
           backgroundImage: 'url(/images/bg-1.png)',
         }}
       >
-        <BackgroundEllipseOne
+        <BackgroundEllipse
+          background="radial-gradient(50% 50% at 50% 50%, rgba(27, 63, 156, 0.56) 0%, rgba(27, 63, 156, 0) 100%)"
+          opacity={0.91}
           style={{
             width: '40vw',
             height: '60vh',
@@ -133,11 +118,13 @@ export default function Home() {
           className="absolute left"
         />
 
-        <BackgroundEllipseTwo
+        <BackgroundEllipse
+          background="radial-gradient(50% 50% at 50% 50%, rgba(156, 27, 58, 0.56) 0%, rgba(142, 21, 101, 0) 100%)"
+          opacity={0.56}
           style={{
-            width: '60vw',
+            width: '40vw',
             height: '60vh',
-            transform: 'translate(60%, -30%)',
+            transform: 'translate(-80%, -10%)',
           }}
           className="absolute left"
         />
@@ -175,15 +162,24 @@ export default function Home() {
 
       <section className="pt-10 pb-48">
         <div className="flex flex-col max-w-screen-md mx-auto md:flex-row">
-          <div className="flex-1 px-3.5 relative origin-top-right" style={{ transform: 'translateX(-30%)' }}>
+          <div
+            className="flex-1 px-3.5 relative origin-top-right"
+            style={{ transform: 'translateX(-30%)' }}
+          >
             <Avatar
               src="/images/avatar-1.png"
               className="absolute top-0 right-0 scale-95"
             />
 
-            <Avatar src="/images/avatar-2.png" className='absolute top-0 right-0 scale-110 -translate-x-32 translate-y-28' />
+            <Avatar
+              src="/images/avatar-2.png"
+              className="absolute top-0 right-0 scale-110 -translate-x-32 translate-y-28"
+            />
 
-            <Avatar src="/images/avatar-3.png" className='absolute top-0 right-0 scale-110 translate-x-6 translate-y-52' />
+            <Avatar
+              src="/images/avatar-3.png"
+              className="absolute top-0 right-0 scale-110 translate-x-6 translate-y-52"
+            />
           </div>
 
           <div className="flex-1 px-3.5 pt-96 md:pt-3.5">
