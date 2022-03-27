@@ -41,6 +41,7 @@ const mdStoriesTextStyle: React.StyleHTMLAttributes<HTMLDivElement>['style'] = {
   WebkitTextFillColor: 'black',
   fontSize: 231,
   lineHeight: '242px',
+  letterSpacing: -10
 };
 
 const MD_TEXT_ROW_NUM = 7;
