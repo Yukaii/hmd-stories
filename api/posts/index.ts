@@ -1,9 +1,9 @@
 import type { APIHandler } from 'aleph/types.d.ts';
 import { getQueryBuilder } from '~/lib/supabase.ts';
-import { CreatePostPayload } from '~/types/index.ts'
+import { CreatePostPayload, Post } from '~/types/index.ts'
 
 const getPosts: APIHandler = async ({ response }) => {
-  const { data: posts, error } = await getQueryBuilder('posts').select('*');
+  const { data: posts, error } = await getQueryBuilder<Post>('posts').select('*').filter('createdAt', 'gt', 'yesterday');
 
   if (error) {
     response.status = 500;
