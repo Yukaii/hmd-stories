@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 
-import Story from '~/components/Story.tsx';
 import { useSprings, animated } from 'react-spring';
 import { Post } from '../types/index.ts';
 import useWindowSize from '../lib/hooks/useWindowSize.ts';

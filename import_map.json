@@ -10,7 +10,8 @@
     "supabase": "https://esm.sh/@supabase/supabase-js@1.31.1",
     "@supabase/postgrest-js": "https://esm.sh/@supabase/postgrest-js@0.37.0",
     "tailwind": "https://deno.land/x/aleph_plugin_tailwindcss@v3.3.1/plugin.ts",
-    "react-spring": "https://esm.sh/react-spring@9.4.4"
+    "react-spring": "https://esm.sh/@react-spring/web@9.4.4",
+    "classnames": "https://esm.sh/classnames@2.3.1"
   },
   "scopes": {}
 }

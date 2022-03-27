@@ -1,6 +1,9 @@
 const config = {
   theme: {
     extend: {
+      fontFamily: {
+        sourceSans: 'Source Sans Pro, sans-serif',
+      },
       colors: {
         gray: {
           100: '#F8F8F8',
@@ -15,6 +18,7 @@ const config = {
           900: '#262626'
         },
         black: {
+          default: '#000',
           brand: '#333'
         },
         yellow: {
@@ -87,35 +91,6 @@ const config = {
       borderWidth: {
         1: '1px'
       }
-    },
-    fontSize: {
-      1: '8px',
-      2: '10px',
-      3: '12px',
-      4: '14px',
-      5: '16px',
-      6: '18px',
-      7: '20px',
-      8: '22px',
-      9: '24px',
-      10: '26px',
-      11: '28px',
-      12: '30px',
-      13: '32px',
-      14: '34px',
-      15: '36px',
-      16: '38px',
-      17: '40px',
-      18: '42px',
-      19: '44px',
-      20: '46px',
-      21: '48px',
-      22: '50px',
-      23: '52px',
-      24: '54px',
-      25: '56px',
-      26: '58px',
-      27: '60px'
     }
   },
   plugins: [],
