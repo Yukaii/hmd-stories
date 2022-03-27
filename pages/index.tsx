@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import cx from 'classnames';
 import Logo from '../components/HMDLogo.tsx';
 import Story from '../components/Story.tsx';
+import useScrollPosition from '../lib/hooks/useScrollPosition.ts'
 
 const Navbar = () => {
   return (
@@ -37,8 +38,8 @@ const mdStoriesTextStyle: React.StyleHTMLAttributes<HTMLDivElement>['style'] = {
   WebkitTextStroke: '2px transparent',
   WebkitTextFillColor: 'black',
   fontSize: 231,
-  lineHeight: '242px'
-}
+  lineHeight: '242px',
+};
 
 const MD_TEXT_ROW_NUM = 7;
 const mdRowMapper = new Array(MD_TEXT_ROW_NUM).fill(0);
@@ -108,6 +109,16 @@ const BackgroundEllipse = ({
 };
 
 export default function Home() {
+  const pageY = useScrollPosition()
+  
+  const movement = useMemo(() => {
+    if (window?.document?.body?.offsetHeight) {
+      return pageY / document.body.offsetHeight * 270;
+    } else {
+      return 0
+    }
+  }, [pageY])
+
   return (
     <div className="overflow-x-hidden text-white bg-black-default">
       <Navbar />
@@ -257,47 +268,71 @@ export default function Home() {
         </div>
       </section>
 
-
-      <section className='relative flex flex-col items-center justify-center py-36' style={{ minHeight: 520 }}>
+      <section
+        className="relative flex flex-col items-center justify-center px-4 py-36"
+        style={{ minHeight: 520 }}
+      >
         {/* here's where magical things live */}
-        <div className='absolute top-0 left-0 w-full h-full overflow-hidden select-none whitespace-nowrap font-sourceSans'>
-            <div>
-              {
-                mdRowMapper.map(() => <span className='mr-4' style={{
-                  ...mdStoriesTextStyle
-                }}>MD Stories</span>)
-              }
-            </div>
-            
-            <div>
-              {
-                mdRowMapper.map(() => <span className='mr-4' style={{
-                  ...mdStoriesTextStyle
-                }}>MD Stories</span>)
-              }
-            </div>
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden select-none whitespace-nowrap font-sourceSans">
+          <div style={{
+            transform: `translateX(calc(${movement}px - 20%))`
+          }}>
+            {mdRowMapper.map(() => (
+              <span
+                className="mr-4"
+                style={{
+                  ...mdStoriesTextStyle,
+                }}
+              >
+                MD Stories
+              </span>
+            ))}
+          </div>
 
-            <div>
-              {
-                mdRowMapper.map(() => <span className='mr-4' style={{
-                  ...mdStoriesTextStyle
-                }}>MD Stories</span>)
-              }
-            </div>
+          <div style={{
+            transform: `translateX(calc(-${movement}px - 20%))`
+          }}>
+            {mdRowMapper.map(() => (
+              <span
+                className="mr-4"
+                style={{
+                  ...mdStoriesTextStyle,
+                }}
+              >
+                MD Stories
+              </span>
+            ))}
+          </div>
+
+          <div style={{
+            transform: `translateX(calc(${movement}px - 20%))`
+          }}>
+            {mdRowMapper.map(() => (
+              <span
+                className="mr-4"
+                style={{
+                  ...mdStoriesTextStyle,
+                }}
+              >
+                MD Stories
+              </span>
+            ))}
+          </div>
         </div>
 
         {/* The card */}
-        <div className='flex-1 w-full max-w-screen-md text-center rounded-lg px-15 pb-15' style={{
-          background: 'linear-gradient(120.15deg, rgba(253, 0, 182, 0.16) 9.37%, rgba(43, 26, 145, 0.16) 96.78%)',
-          backdropFilter: 'blur(20px)'
-        }}>
-          <h2 className='text-6xl'>全新打造</h2>
+        <div
+          className="flex-1 w-full max-w-screen-md text-center rounded-lg px-15 pb-15"
+          style={{
+            background:
+              'linear-gradient(120.15deg, rgba(253, 0, 182, 0.16) 9.37%, rgba(43, 26, 145, 0.16) 96.78%)',
+            backdropFilter: 'blur(10px)',
+          }}
+        >
+          <h2 className="text-6xl">全新打造</h2>
 
-          <p>
-            這是一段神奇的文字是副標
-          </p>
+          <p>這是一段神奇的文字是副標</p>
         </div>
-
       </section>
     </div>
   );
