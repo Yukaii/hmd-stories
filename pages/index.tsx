@@ -31,6 +31,47 @@ const textClipStyle = {
   WebkitTextFillColor: 'transparent',
 };
 
+const igAvatar = {
+  backgroundImage: `linear-gradient(
+		45deg,
+		#ffa95f 5%,
+		#f99c4a 15%,
+		#f47838 30%,
+		#e75157 45%,
+		#d92d7a 70%,
+		#cc2a92 80%,
+		#c32e92 95%
+	)`,
+  width: 115,
+  height: 115,
+};
+
+const Avatar = ({
+  className,
+  style,
+  src,
+}: {
+  src: string;
+  className?: string;
+  style?: React.StyleHTMLAttributes<HTMLDivElement>['style'];
+}) => {
+  return (
+    <div
+      style={{
+        ...igAvatar,
+        ...style,
+      }}
+      className={cx('flex items-center justify-center rounded-full', className)}
+    >
+      <img
+        src={src}
+        style={{ width: 95 }}
+        className="border-8 border-solid rounded-full border-black-default"
+      />
+    </div>
+  );
+};
+
 const BackgroundEllipseOne = ({
   style,
   className,
@@ -79,22 +120,30 @@ export default function Home() {
       <section
         className="relative flex flex-col items-center pt-24 origin-center"
         style={{
-          height: 'calc(100vh - 60px)',
+          // height: 'calc(100vh - 60px)',
           backgroundImage: 'url(/images/bg-1.png)',
         }}
       >
         <BackgroundEllipseOne
-          style={{ width: '40vw', height: '60vh', transform: 'translate(-80%, -10%)' }}
+          style={{
+            width: '40vw',
+            height: '60vh',
+            transform: 'translate(-80%, -10%)',
+          }}
           className="absolute left"
         />
 
         <BackgroundEllipseTwo
-          style={{ width: '60vw', height: '60vh', transform: 'translate(60%, -30%)' }}
+          style={{
+            width: '60vw',
+            height: '60vh',
+            transform: 'translate(60%, -30%)',
+          }}
           className="absolute left"
         />
 
         <div className="z-10 flex flex-col items-center justify-center">
-          <Logo className="text-2xl" />
+          <Logo className="text-3xl" />
 
           <h1 className="select-none font-sourceSans text-[10vw] sm:text-[10vw] md:text-7xl lg:text-8xl mt-4.5 mb-1">
             隆重推出 &nbsp;
@@ -119,9 +168,33 @@ export default function Home() {
         </div>
 
         <img
-          className="z-10 w-full h-auto max-w-screen-md"
+          className="z-10 w-full h-auto max-w-screen-lg"
           src="/images/screenshot.png"
         />
+      </section>
+
+      <section className="pt-10 pb-48">
+        <div className="flex flex-col max-w-screen-md mx-auto md:flex-row">
+          <div className="flex-1 px-3.5 relative origin-top-right" style={{ transform: 'translateX(-30%)' }}>
+            <Avatar
+              src="/images/avatar-1.png"
+              className="absolute top-0 right-0 scale-95"
+            />
+
+            <Avatar src="/images/avatar-2.png" className='absolute top-0 right-0 scale-110 -translate-x-32 translate-y-28' />
+
+            <Avatar src="/images/avatar-3.png" className='absolute top-0 right-0 scale-110 translate-x-6 translate-y-52' />
+          </div>
+
+          <div className="flex-1 px-3.5 pt-96 md:pt-3.5">
+            <h1 className="mt-0 mb-4 text-4xl md:text-6xl">這是標題</h1>
+            <h2 className="text-2xl md:text-3xl">這是一段神奇的文字</h2>
+
+            <p>
+              這是一段神奇的文字是副標這是一段神奇的文字是副標這是一段神奇的文字是副標這是一段神奇的文字是副標
+            </p>
+          </div>
+        </div>
       </section>
     </div>
   );

@@ -72,6 +72,7 @@ export default function useConfigTailwind() {
               '20': '80px',
               '24': '96px',
               '28': '112px',
+              '30': '120px',
               '32': '128px',
               '36': '144px',
               '40': '160px',
