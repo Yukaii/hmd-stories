@@ -11,7 +11,8 @@
     "@supabase/postgrest-js": "https://esm.sh/@supabase/postgrest-js@0.37.0",
     "tailwind": "https://deno.land/x/aleph_plugin_tailwindcss@v3.3.1/plugin.ts",
     "react-spring": "https://esm.sh/@react-spring/web@9.4.4",
-    "classnames": "https://esm.sh/classnames@2.3.1"
+    "classnames": "https://esm.sh/classnames@2.3.1",
+    "use-is-in-viewport": "https://esm.sh/use-is-in-viewport@1.0.9"
   },
   "scopes": {}
 }

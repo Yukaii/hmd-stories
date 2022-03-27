@@ -1,8 +1,10 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import cx from 'classnames';
+import useIsInViewport from 'use-is-in-viewport';
+
 import Logo from '../components/HMDLogo.tsx';
 import Story from '../components/Story.tsx';
-import useScrollPosition from '../lib/hooks/useScrollPosition.ts'
+import useScrollPosition from '../lib/hooks/useScrollPosition.ts';
 
 const Navbar = () => {
   return (
@@ -109,15 +111,23 @@ const BackgroundEllipse = ({
 };
 
 export default function Home() {
-  const pageY = useScrollPosition()
-  
+  const pageY = useScrollPosition();
+
   const movement = useMemo(() => {
     if (window?.document?.body?.offsetHeight) {
-      return pageY / document.body.offsetHeight * 270;
+      return (pageY / document.body.offsetHeight) * 270;
     } else {
-      return 0
+      return 0;
     }
-  }, [pageY])
+  }, [pageY]);
+
+  const [isInViewport, targetRef] = useIsInViewport();
+  const [slideIn, setSlideIn] = useState(false)
+  useEffect(() => {
+    if (isInViewport) {
+      setSlideIn(true);
+    }
+  }, [isInViewport]);
 
   return (
     <div className="overflow-x-hidden text-white bg-black-default">
@@ -217,7 +227,10 @@ export default function Home() {
       </section>
 
       <section className="relative max-w-screen-lg pb-20 mx-auto">
-        <div className="flex flex-col md:flex-row md:items-center">
+        <div
+          className="flex flex-col md:flex-row md:items-center"
+          ref={targetRef}
+        >
           <div className="flex-1 px-3.5 md:pt-3.5">
             <h1 className="mt-0 mb-4 text-4xl md:text-6xl">這是標題</h1>
             <h2 className="text-2xl md:text-3xl">這是一段神奇的文字</h2>
@@ -227,7 +240,13 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="relative flex-1" style={{ maxWidth: '50%' }}>
+          <div
+            className="relative flex-1 transition-transform duration-300 ease-in-out"
+            style={{
+              maxWidth: '50%',
+              transform: `translateX(${slideIn ? '0' : '150%'})`,
+            }}
+          >
             <div
               className="flex items-center flex-nowrap"
               style={{ gap: '5%' }}
@@ -274,9 +293,11 @@ export default function Home() {
       >
         {/* here's where magical things live */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden select-none whitespace-nowrap font-sourceSans">
-          <div style={{
-            transform: `translateX(calc(${movement}px - 20%))`
-          }}>
+          <div
+            style={{
+              transform: `translateX(calc(${movement}px - 20%))`,
+            }}
+          >
             {mdRowMapper.map(() => (
               <span
                 className="mr-4"
@@ -289,9 +310,11 @@ export default function Home() {
             ))}
           </div>
 
-          <div style={{
-            transform: `translateX(calc(-${movement}px - 20%))`
-          }}>
+          <div
+            style={{
+              transform: `translateX(calc(-${movement}px - 20%))`,
+            }}
+          >
             {mdRowMapper.map(() => (
               <span
                 className="mr-4"
@@ -304,9 +327,11 @@ export default function Home() {
             ))}
           </div>
 
-          <div style={{
-            transform: `translateX(calc(${movement}px - 20%))`
-          }}>
+          <div
+            style={{
+              transform: `translateX(calc(${movement}px - 20%))`,
+            }}
+          >
             {mdRowMapper.map(() => (
               <span
                 className="mr-4"
@@ -334,6 +359,8 @@ export default function Home() {
           <p>這是一段神奇的文字是副標</p>
         </div>
       </section>
+
+      <footer></footer>
     </div>
   );
 }
