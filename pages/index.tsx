@@ -1,6 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 import Logo from '../components/HMDLogo.tsx';
+import Story from '../components/Story.tsx';
 
 const Navbar = () => {
   return (
@@ -189,6 +190,58 @@ export default function Home() {
             <p>
               這是一段神奇的文字是副標這是一段神奇的文字是副標這是一段神奇的文字是副標這是一段神奇的文字是副標
             </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative max-w-screen-lg pb-20 mx-auto">
+        <div className="flex flex-col md:flex-row md:items-center">
+          <div className="flex-1 px-3.5 pt-96 md:pt-3.5">
+            <h1 className="mt-0 mb-4 text-4xl md:text-6xl">這是標題</h1>
+            <h2 className="text-2xl md:text-3xl">這是一段神奇的文字</h2>
+
+            <p>
+              這是一段神奇的文字是副標這是一段神奇的文字是副標這是一段神奇的文字是副標這是一段神奇的文字是副標
+            </p>
+          </div>
+
+          <div className="relative flex-1" style={{ maxWidth: '50%' }}>
+            <div
+              className="flex items-center flex-nowrap"
+              style={{ gap: '5%' }}
+            >
+              <Story
+                markdown={`隱藏在黑暗力量的鑰匙啊，\n在我面前顯示你真正的力量！`}
+                width={255}
+                height={388}
+                className="px-8 text-base bg-center bg-cover rounded-2xl"
+                style={{
+                  boxShadow: '0px 16px 32px rgba(255, 58, 94, 0.25)',
+                  backgroundImage: 'url(/images/card_bg_sample.png)',
+                }}
+              />
+
+              <Story
+                markdown={`隱藏在黑暗力量的鑰匙啊，\n在我面前顯示你真正的力量！`}
+                width={190}
+                height={315}
+                className="px-8 text-base bg-center bg-cover rounded-2xl"
+                style={{
+                  boxShadow: '0px 16px 32px rgba(255, 58, 94, 0.25)',
+                }}
+              />
+
+              <Story
+                markdown={''}
+                width={190}
+                height={315}
+                className="px-8 text-base bg-center bg-cover rounded-2xl"
+                style={{
+                  boxShadow: '0px 16px 32px rgba(255, 58, 94, 0.25)',
+                  opacity: 0.3,
+                }}
+              />
+            </div>
           </div>
         </div>
       </section>
