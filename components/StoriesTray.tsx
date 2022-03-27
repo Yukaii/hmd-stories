@@ -254,7 +254,7 @@ export default function StoriesTray({ stories }: { stories: Post[] }) {
 
         return (
           <animated.div
-            className="bg-white rounded fixed origin-top-left text-gray-900 cursor-pointer"
+            className="bg-white fixed origin-top-left text-gray-900 cursor-pointer rounded-lg"
             style={{
               color: 'black',
               width: cardWidth,
