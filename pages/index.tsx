@@ -115,14 +115,14 @@ export default function Home() {
 
   const movement = useMemo(() => {
     if (window?.document?.body?.offsetHeight) {
-      return (pageY / document.body.offsetHeight) * 270;
+      return (pageY / document.body.offsetHeight) * 330;
     } else {
       return 0;
     }
   }, [pageY]);
 
   const [isInViewport, targetRef] = useIsInViewport();
-  const [slideIn, setSlideIn] = useState(false)
+  const [slideIn, setSlideIn] = useState(false);
   useEffect(() => {
     if (isInViewport) {
       setSlideIn(true);
