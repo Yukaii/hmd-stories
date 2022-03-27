@@ -1,13 +1,16 @@
 import React from 'react';
-import StoriesTray from '~/components/StoriesTray.tsx';
+import { dynamic } from 'aleph/react';
+
 import { Post } from '../types/index.ts';
+
+const StoriesTray = dynamic(() => import('~/components/StoriesTray.tsx'));
 
 const post: Omit<Post, 'id'> = {
   userpath: 'hello world',
   content: '# asdfasd',
   deleteToken: 'asdfasdf',
   variant: 0,
-  createdAt: Date.now()
+  createdAt: Date.now(),
 };
 
 export default function Home() {
