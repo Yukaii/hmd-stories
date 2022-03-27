@@ -15,6 +15,7 @@ export type Post = {
 	content: string
 	variant: PostType,
 	deleteToken: string
+	createdAt: number
 }
 
 export type CreatePostPayload = Pick<Post, 'userpath' | 'content' | 'variant'>
