@@ -161,7 +161,7 @@ export default function Home() {
         />
       </section>
 
-      <section className="pt-10 pb-48">
+      <section className="pt-10 pb-12 md:pb-48">
         <div className="flex flex-col max-w-screen-md mx-auto md:flex-row">
           <div
             className="flex-1 px-3.5 relative origin-top-right"
@@ -196,7 +196,7 @@ export default function Home() {
 
       <section className="relative max-w-screen-lg pb-20 mx-auto">
         <div className="flex flex-col md:flex-row md:items-center">
-          <div className="flex-1 px-3.5 pt-96 md:pt-3.5">
+          <div className="flex-1 px-3.5 md:pt-3.5">
             <h1 className="mt-0 mb-4 text-4xl md:text-6xl">這是標題</h1>
             <h2 className="text-2xl md:text-3xl">這是一段神奇的文字</h2>
 
