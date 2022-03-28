@@ -131,7 +131,7 @@ export default function Home() {
   }, [isInViewport]);
 
   return (
-    <div className="overflow-x-hidden text-white bg-black-default">
+    <div className="overflow-x-hidden text-white bg-black-default font-sourceSans">
       <Navbar />
 
       <section
@@ -296,7 +296,7 @@ export default function Home() {
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden select-none whitespace-nowrap font-sourceSans">
           <div
             style={{
-              transform: `translateX(calc(${movement}px - 20%))`,
+              transform: `translateX(calc(${movement}px - 50%))`,
             }}
           >
             {mdRowMapper.map(() => (
@@ -313,7 +313,7 @@ export default function Home() {
 
           <div
             style={{
-              transform: `translateX(calc(-${movement}px - 20%))`,
+              transform: `translateX(calc(-${movement}px - 50%))`,
             }}
           >
             {mdRowMapper.map(() => (
@@ -330,7 +330,7 @@ export default function Home() {
 
           <div
             style={{
-              transform: `translateX(calc(${movement}px - 20%))`,
+              transform: `translateX(calc(${movement}px - 50%))`,
             }}
           >
             {mdRowMapper.map(() => (
@@ -348,11 +348,12 @@ export default function Home() {
 
         {/* The card */}
         <div
-          className="flex-1 w-full max-w-screen-md text-center rounded-lg px-15 pb-15"
+          className="z-10 flex-1 w-full max-w-screen-md text-center rounded-lg px-15 pb-15"
           style={{
             background:
               'linear-gradient(120.15deg, rgba(253, 0, 182, 0.16) 9.37%, rgba(43, 26, 145, 0.16) 96.78%)',
             backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)',
           }}
         >
           <h2 className="text-6xl">全新打造</h2>
