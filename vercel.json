@@ -1,7 +1,13 @@
 {
-  "functions": {
-    "api/**/*.{j,t}s": {
-      "runtime": "vercel-aleph@0.7.0"
+  "headers": [
+    {
+      "source": "/fonts/inter-var-latin.woff2",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     }
-  }
+  ]
 }
