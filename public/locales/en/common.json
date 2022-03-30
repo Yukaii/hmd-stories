@@ -1,0 +1,23 @@
+{
+  "login": "Login",
+  "landing": {
+    "introducing": "Stage your notes, make up the best of your life, with",
+    "subtitle": "Incredible filters, curated presences.",
+    "cta-1": "View MD Stories",
+    "section-1": {
+      "title": "Make Stories from your notes, with filters to beautify",
+      "subtitle": "",
+      "description": "You spend so much effort writing notes, they deserve to be seen. Let our algorithm to worry about your writing skill, apply filters to make your notes more clever, chill, and capable."
+    },
+    "section-2": {
+      "title": "All the coolest people are on MD Stories",
+      "subtitle": "",
+      "description": "Follow the nerdy classmates, the young single dads, the roommates who keep Tarantulas as pets. See the best lines of code they wrote today, how to change diaper when in night markets, and other furry pets to keep as companies."
+    },
+    "section-3": {
+      "title": "Never follow suit",
+      "subtitle": "MD Stories uses cutting-edge tech to make your experience unique, like only for today.",
+      "cta": "View MD Stories"
+    }
+  }
+}

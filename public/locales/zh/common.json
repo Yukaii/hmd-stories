@@ -1,0 +1,23 @@
+{
+  "login": "登入",
+  "landing": {
+    "introducing": "隆重推出",
+    "subtitle": "業界最騙濾鏡，限時與你相逢",
+    "cta-1": "馬上瀏覽筆記限動",
+    "section-1": {
+      "title": "嗨！筆記限動",
+      "subtitle": "給筆記最美的舞臺",
+      "description": "AI 加持，業界最騙演算法，亂寫的筆記都能一鍵美化，讓人拍案叫絕。"
+    },
+    "section-2": {
+      "title": "意念瀏覽",
+      "subtitle": "向左滑，向右滑，全在一念之間",
+      "description": "最酷的人都在 MD Stories。阿花的 code，小明的 poem，even 你阿公一邊甩手一邊都在發嗨筆記限動。"
+    },
+    "section-3": {
+      "title": "絕不跟風",
+      "subtitle": "筆記發限動，是一種風格，不是跟風。跟風的是小狗。",
+      "cta": "瀏覽 MD Stories"
+    }
+  }
+}

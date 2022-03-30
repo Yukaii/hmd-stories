@@ -3,7 +3,7 @@ const config = {
   theme: {
     extend: {
       fontFamily: {
-        sourceSans: 'Source Sans Pro, sans-serif',
+        sourceSans: 'Source Sans Pro, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
       },
       colors: {
         gray: {
@@ -97,7 +97,7 @@ const config = {
   },
   plugins: [],
   corePlugins: {
-    preflight: false,
+    preflight: true,
     container: false
   }  
 };

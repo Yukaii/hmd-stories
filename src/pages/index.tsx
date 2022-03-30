@@ -1,4 +1,8 @@
 import cx from 'classnames';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import React, { useEffect, useMemo, useState } from 'react';
 import useIsInViewport from 'use-is-in-viewport';
 
@@ -8,6 +12,8 @@ import Logo from '@/components/HMDLogo';
 import Story from '@/components/Story';
 
 const Navbar = () => {
+  const { t } = useTranslation('common');
+
   return (
     <div
       className='sticky top-0 flex justify-between px-4 py-4 sm:px-7.5'
@@ -16,13 +22,23 @@ const Navbar = () => {
       <Logo className='text-xl' />
 
       <div className='text-5 flex items-center'>
+        <span className='mr-4 text-white visited:text-white hover:text-gray-200'>
+          <Link href='/' locale='en'>
+            <a className='underline'>En</a>
+          </Link>
+          &nbsp;/&nbsp;
+          <Link href='/' locale='zh'>
+            <a className='underline'>中</a>
+          </Link>
+        </span>
+
         <a
           href='https://hackmd.io/login'
           className='text-white'
           target='_blank'
           rel='noreferrer'
         >
-          Login
+          {t('login')}
         </a>
       </div>
     </div>
@@ -83,7 +99,7 @@ const Avatar = ({
     >
       <img
         src={src}
-        style={{ width: 95 }}
+        style={{ width: 110 }}
         className='rounded-full border-8 border-solid border-black-default'
       />
     </div>
@@ -114,6 +130,8 @@ const BackgroundEllipse = ({
 };
 
 export default function Home() {
+  const { t } = useTranslation('common');
+  const { locale } = useRouter();
   const pageY = useScrollPosition();
 
   const movement = useMemo(() => {
@@ -172,8 +190,16 @@ export default function Home() {
         <div className='z-10 flex flex-col items-center justify-center'>
           <Logo className='text-3xl' />
 
-          <h1 className='mt-4.5 mb-1 select-none font-sourceSans text-[10vw] sm:text-[10vw] md:text-7xl lg:text-8xl'>
-            隆重推出 &nbsp;
+          <h1
+            className={cx(
+              'mt-4.5 mb-1 select-none font-sourceSans text-[10vw] sm:text-[10vw] md:text-7xl lg:text-8xl',
+              {
+                ['mx-auto max-w-screen-md']: locale === 'en',
+              }
+            )}
+          >
+            {t('landing.introducing')}
+            &nbsp;
             <span
               className='bg-clip-text'
               style={{
@@ -185,11 +211,14 @@ export default function Home() {
           </h1>
 
           <h3 className='mt-3 mb-0 text-lg font-normal text-white opacity-70 md:text-2xl '>
-            這是一段神奇的文字
+            {t('landing.subtitle')}
           </h3>
 
-          <a style={textClipStyle} className='mt-12 mb-20'>
-            霹靂卡霹靂拉拉波波力那貝貝魯多
+          <a
+            style={textClipStyle}
+            className='mt-12 mb-20 cursor-pointer hover:underline'
+          >
+            {t('landing.cta-1')}
             <i className='fa fa-angle-right ml-0.5' aria-hidden='true' />
           </a>
         </div>
@@ -223,12 +252,14 @@ export default function Home() {
           </div>
 
           <div className='flex-1 px-3.5 pt-96 md:pt-3.5'>
-            <h1 className='mt-0 mb-4 text-4xl md:text-6xl'>這是標題</h1>
-            <h2 className='text-2xl md:text-3xl'>這是一段神奇的文字</h2>
+            <h1 className='mt-0 mb-4 text-4xl md:text-5xl'>
+              {t('landing.section-1.title')}
+            </h1>
+            <h2 className='mb-10 text-2xl'>
+              {t('landing.section-1.subtitle')}
+            </h2>
 
-            <p>
-              這是一段神奇的文字是副標這是一段神奇的文字是副標這是一段神奇的文字是副標這是一段神奇的文字是副標
-            </p>
+            <p className='text-lg'>{t('landing.section-1.description')}</p>
           </div>
         </div>
       </section>
@@ -239,12 +270,15 @@ export default function Home() {
           ref={targetRef}
         >
           <div className='flex-1 px-3.5 md:pt-3.5'>
-            <h1 className='mt-0 mb-4 text-4xl md:text-6xl'>這是標題</h1>
-            <h2 className='text-2xl md:text-3xl'>這是一段神奇的文字</h2>
+            <h1 className='mt-0 mb-4 text-4xl md:text-5xl'>
+              {t('landing.section-2.title')}
+            </h1>
 
-            <p>
-              這是一段神奇的文字是副標這是一段神奇的文字是副標這是一段神奇的文字是副標這是一段神奇的文字是副標
-            </p>
+            <h2 className='mb-10 text-2xl'>
+              {t('landing.section-2.subtitle')}
+            </h2>
+
+            <p className='text-lg'>{t('landing.section-2.description')}</p>
           </div>
 
           <div
@@ -357,7 +391,7 @@ export default function Home() {
 
         {/* The card */}
         <div
-          className='z-10 w-full max-w-screen-md flex-1 rounded-lg px-15 pb-15 text-center'
+          className='z-10 flex w-full max-w-screen-md flex-1 flex-col items-center justify-center rounded-lg px-15 pt-15 pb-15 text-center'
           style={{
             background:
               'linear-gradient(120.15deg, rgba(253, 0, 182, 0.16) 9.37%, rgba(43, 26, 145, 0.16) 96.78%)',
@@ -365,13 +399,22 @@ export default function Home() {
             WebkitBackdropFilter: 'blur(10px)',
           }}
         >
-          <h2 className='text-6xl'>全新打造</h2>
+          <h2 className='mb-6 text-6xl'>{t('landing.section-3.title')}</h2>
 
-          <p>這是一段神奇的文字是副標</p>
+          <p className='text-xl'>{t('landing.section-3.subtitle')}</p>
         </div>
       </section>
 
       <footer></footer>
     </div>
   );
+}
+
+export async function getServerSideProps({ locale }: { locale: string }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common'])),
+      // Will be passed to the page component as props
+    },
+  };
 }
