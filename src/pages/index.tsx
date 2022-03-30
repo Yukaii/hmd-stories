@@ -1,4 +1,5 @@
 import cx from 'classnames';
+import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
@@ -19,6 +20,10 @@ const Navbar = () => {
       className='sticky top-0 flex justify-between px-4 py-4 sm:px-7.5'
       style={{ backgroundColor: 'rgba(0, 0, 0, 0.51)' }}
     >
+      <Head>
+        <title>{t('title')} | HackMD</title>
+      </Head>
+
       <Logo className='text-xl' />
 
       <div className='text-5 flex items-center'>

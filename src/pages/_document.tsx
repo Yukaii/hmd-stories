@@ -30,6 +30,7 @@ class MyDocument extends Document {
             crossOrigin='anonymous'
             referrerPolicy='no-referrer'
           />
+          <link rel='icon' href='/favicon/favicon.png' />
         </Head>
         <body>
           <Main />
