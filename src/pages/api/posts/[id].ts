@@ -1,9 +1,14 @@
+import Cors from 'cors';
 import { NextApiRequest, NextApiResponse } from 'next';
 import nc from 'next-connect';
 
 import { getQueryBuilder } from '@/lib/supabase';
 
 import { Post } from '@/types';
+
+const cors = Cors({
+  methods: ['OPTIONS', 'HEAD', 'DELETE'],
+});
 
 const deletePost = async (req: NextApiRequest, res: NextApiResponse) => {
   const postId = req.query.id as string;
@@ -37,6 +42,6 @@ const deletePost = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-const handler = nc().delete(deletePost);
+const handler = nc().use(cors).delete(deletePost);
 
 export default handler;
