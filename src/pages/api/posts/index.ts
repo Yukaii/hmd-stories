@@ -1,9 +1,15 @@
+import Cors from 'cors';
 import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 import nc from 'next-connect';
 
 import { getQueryBuilder } from '@/lib/supabase';
 
 import { CreatePostPayload, Post } from '@/types';
+
+// Initializing the cors middleware
+const cors = Cors({
+  methods: ['GET', 'OPTIONS', 'HEAD', 'POST'],
+});
 
 const getPosts = async (req: NextApiRequest, res: NextApiResponse) => {
   const { data: posts, error } = await getQueryBuilder<Post>('posts')
@@ -47,6 +53,6 @@ const createPost: NextApiHandler = async (
   }
 };
 
-const handler: NextApiHandler = nc().get(getPosts).post(createPost);
+const handler: NextApiHandler = nc().use(cors).get(getPosts).post(createPost);
 
 export default handler;
