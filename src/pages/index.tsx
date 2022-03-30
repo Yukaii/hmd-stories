@@ -404,7 +404,22 @@ export default function Home() {
         >
           <h2 className='mb-6 text-6xl'>{t('landing.section-3.title')}</h2>
 
-          <p className='text-xl'>{t('landing.section-3.subtitle')}</p>
+          <p className='mb-8 text-xl'>{t('landing.section-3.subtitle')}</p>
+
+          <a
+            className='px-12 py-4'
+            style={{
+              background:
+                'linear-gradient(101.03deg, #FFD336 -4.74%, #FF208B 99.86%)',
+              boxShadow: '0px 12px 24px rgba(255, 94, 44, 0.32)',
+              borderRadius: 13,
+            }}
+            href='https://hackmd.io/login'
+            target='_blank'
+            rel='noreferrer'
+          >
+            {t('landing.section-3.cta')}
+          </a>
         </div>
       </section>
 

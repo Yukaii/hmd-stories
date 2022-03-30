@@ -6,7 +6,6 @@ import { getQueryBuilder } from '@/lib/supabase';
 
 import { CreatePostPayload, Post } from '@/types';
 
-// Initializing the cors middleware
 const cors = Cors({
   methods: ['GET', 'OPTIONS', 'HEAD', 'POST'],
 });
