@@ -8,6 +8,9 @@ import { CreatePostPayload, Post } from '@/types';
 const getPosts = async (req: NextApiRequest, res: NextApiResponse) => {
   const { data: posts, error } = await getQueryBuilder<Post>('posts')
     .select('*')
+    .order('createdAt', {
+      ascending: false,
+    })
     .filter('createdAt', 'gt', 'yesterday');
 
   if (error) {
