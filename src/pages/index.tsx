@@ -27,7 +27,7 @@ const Navbar = () => {
             <a className='underline'>En</a>
           </Link>
           &nbsp;/&nbsp;
-          <Link href='/' locale='zh'>
+          <Link href='/' locale='zh-TW'>
             <a className='underline'>中</a>
           </Link>
         </span>
@@ -155,7 +155,7 @@ export default function Home() {
   }, [isInViewport]);
 
   return (
-    <div className='overflow-x-hidden bg-black-default font-sourceSans text-white'>
+    <div className='overflow-x-hidden bg-black-default text-white'>
       <Navbar />
 
       <section
@@ -192,7 +192,7 @@ export default function Home() {
 
           <h1
             className={cx(
-              'mt-4.5 mb-1 select-none font-sourceSans text-[10vw] sm:text-[10vw] md:text-7xl lg:text-8xl',
+              'mt-4.5 mb-1 select-none font-sourceSans text-[10vw] font-semibold sm:text-[10vw] md:text-7xl lg:text-8xl',
               {
                 ['mx-auto max-w-screen-md']: locale === 'en',
               }
@@ -201,7 +201,7 @@ export default function Home() {
             {t('landing.introducing')}
             &nbsp;
             <span
-              className='bg-clip-text'
+              className='bg-clip-text font-sourceSans'
               style={{
                 ...textClipStyle,
               }}
@@ -210,13 +210,16 @@ export default function Home() {
             </span>
           </h1>
 
-          <h3 className='mt-3 mb-0 text-lg font-normal text-white opacity-70 md:text-2xl '>
+          <h3 className='mt-3 mb-0 text-lg font-normal text-white opacity-70 md:text-2xl'>
             {t('landing.subtitle')}
           </h3>
 
           <a
             style={textClipStyle}
             className='mt-12 mb-20 cursor-pointer hover:underline'
+            href='https://hackmd.io/login'
+            target='_blank'
+            rel='noreferrer'
           >
             {t('landing.cta-1')}
             <i className='fa fa-angle-right ml-0.5' aria-hidden='true' />
