@@ -267,12 +267,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className='relative mx-auto max-w-screen-lg pb-20'>
-        <div
-          className='flex flex-col md:flex-row md:items-center'
-          ref={targetRef}
-        >
-          <div className='flex-1 px-3.5 md:pt-3.5'>
+      <section className='relative mx-auto max-w-screen-lg pb-24'>
+        <div className='flex flex-col md:flex-row' ref={targetRef}>
+          <div className='flex-1 px-3.5 md:pt-24'>
             <h1 className='mt-0 mb-4 text-4xl md:text-5xl'>
               {t('landing.section-2.title')}
             </h1>
@@ -284,48 +281,48 @@ export default function Home() {
             <p className='text-lg'>{t('landing.section-2.description')}</p>
           </div>
 
-          <div
-            className='relative flex-1 transition-transform duration-300 ease-in-out'
-            style={{
-              maxWidth: '50%',
-              transform: `translateX(${slideIn ? '0' : '150%'})`,
-            }}
-          >
-            <div
-              className='flex flex-nowrap items-center'
-              style={{ gap: '5%' }}
-            >
-              <Story
-                markdown={`隱藏在黑暗力量的鑰匙啊，\n在我面前顯示你真正的力量！`}
-                width={255}
-                height={388}
-                className='rounded-2xl bg-cover bg-center px-8 text-base'
+          <div className='flex-1'>
+            <div className='relative h-full w-full'>
+              <div
+                className='absolute grid w-auto grid-cols-3 grid-rows-1 items-center gap-3'
                 style={{
-                  boxShadow: '0px 16px 32px rgba(255, 58, 94, 0.25)',
-                  backgroundImage: 'url(/images/card_bg_sample.png)',
+                  minWidth: 900,
                 }}
-              />
+              >
+                <Story
+                  markdown={`隱藏在黑暗力量的鑰匙啊，\n在我面前顯示你真正的力量！`}
+                  width={255}
+                  height={388}
+                  className='rounded-2xl bg-cover bg-center px-8 text-base'
+                  style={{
+                    boxShadow: '0px 16px 32px rgba(255, 58, 94, 0.25)',
+                    backgroundImage: 'url(/images/card_bg_sample.png)',
+                  }}
+                />
 
-              <Story
-                markdown={`隱藏在黑暗力量的鑰匙啊，\n在我面前顯示你真正的力量！`}
-                width={190}
-                height={315}
-                className='rounded-2xl bg-cover bg-center px-8 text-base'
-                style={{
-                  boxShadow: '0px 16px 32px rgba(255, 58, 94, 0.25)',
-                }}
-              />
+                <Story
+                  markdown={`隱藏在黑暗力量的鑰匙啊，\n在我面前顯示你真正的力量！`}
+                  width={255}
+                  height={388}
+                  className='rounded-2xl bg-cover bg-center px-8 text-base'
+                  style={{
+                    boxShadow: '0px 16px 32px rgba(255, 58, 94, 0.25)',
+                    transform: 'scale(0.8)',
+                  }}
+                />
 
-              <Story
-                markdown=''
-                width={190}
-                height={315}
-                className='rounded-2xl bg-cover bg-center px-8 text-base'
-                style={{
-                  boxShadow: '0px 16px 32px rgba(255, 58, 94, 0.25)',
-                  opacity: 0.3,
-                }}
-              />
+                <Story
+                  markdown=''
+                  width={255}
+                  height={388}
+                  className='rounded-2xl bg-cover bg-center px-8 text-base'
+                  style={{
+                    boxShadow: '0px 16px 32px rgba(255, 58, 94, 0.25)',
+                    opacity: 0.3,
+                    transform: 'scale(0.8)',
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>

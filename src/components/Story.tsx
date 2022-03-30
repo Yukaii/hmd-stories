@@ -17,7 +17,7 @@ export default function Story({
   return (
     <div
       className={cx(
-        'flex items-center justify-center whitespace-pre rounded',
+        'inline-flex items-center justify-center whitespace-pre rounded',
         className
       )}
       style={{
