@@ -1,5 +1,6 @@
 import cx from 'classnames';
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
@@ -231,9 +232,13 @@ export default function Home() {
           </a>
         </div>
 
-        <img
+        <Image
           className='z-10 h-auto w-full max-w-screen-lg'
-          src='/images/screenshot.png'
+          src='/images/Banner-screenshort.png'
+          alt='MD Stories'
+          width={1155}
+          height={437}
+          quality={100}
         />
       </section>
 
