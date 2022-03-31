@@ -273,8 +273,8 @@ export default function Home() {
       </section>
 
       <section className='relative mx-auto max-w-screen-lg pb-24'>
-        <div className='flex flex-col md:flex-row' ref={targetRef}>
-          <div className='flex-1 px-3.5 md:pt-24'>
+        <div className='flex flex-col-reverse md:flex-row' ref={targetRef}>
+          <div className='flex-1 px-3.5 pt-100 md:pt-24'>
             <h1 className='mt-0 mb-4 text-4xl md:text-5xl'>
               {t('landing.section-2.title')}
             </h1>
