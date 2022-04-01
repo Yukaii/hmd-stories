@@ -1,12 +1,8 @@
 export enum PostType {
-  BLACK,
-  GREY,
+  DEFAULT,
+  WAVE,
   ORANGE,
-  PINK_AND_ORANGE,
-  PURPLE,
-  GREEN,
-  PURPLE_AND_PINK,
-  // RAINBOW
+  BLACK,
 }
 
 export type Post = {

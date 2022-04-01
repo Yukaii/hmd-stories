@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { animated, useSprings } from '@react-spring/web';
+import { useSprings } from '@react-spring/web';
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 
+import Story from './Story';
 import useWindowSize from '../lib/hooks/useWindowSize';
 
 import { Post } from '@/types';
@@ -241,7 +242,7 @@ export default function StoriesTray({ stories }: { stories: Post[] }) {
   }, [hasPrev, viewIndex]);
 
   return (
-    <div className='fixed top-0 left-0 flex h-full w-full overflow-hidden bg-black-brand'>
+    <div className='fixed top-0 left-0 flex h-full w-full overflow-hidden bg-slate-900'>
       {visibleStories.map((story, i) => {
         if (!story) {
           return null;
@@ -250,13 +251,13 @@ export default function StoriesTray({ stories }: { stories: Post[] }) {
         const style = springs[i];
 
         return (
-          <animated.div
+          <Story
             key={story.id}
-            className='fixed origin-top-left cursor-pointer rounded-lg bg-white text-gray-900'
+            className='fixed origin-top-left cursor-pointer bg-white bg-cover bg-center px-8 text-4xl text-gray-900'
+            width={cardWidth}
+            height={cardHeight}
+            variant={story.variant}
             style={{
-              color: 'black',
-              width: cardWidth,
-              height: cardHeight,
               ...style,
             }}
             onClick={() => {
@@ -267,10 +268,8 @@ export default function StoriesTray({ stories }: { stories: Post[] }) {
               }
             }}
           >
-            #{story.id}
-            <br />
             {story.content}
-          </animated.div>
+          </Story>
         );
       })}
 
