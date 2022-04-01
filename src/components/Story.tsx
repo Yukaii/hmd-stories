@@ -50,7 +50,7 @@ export default function Story({
     Comp,
     {
       className: cx(
-        'flex items-center justify-center break-all whitespace-normal rounded-2xl bg-cover text-center',
+        'flex items-center justify-center break-all whitespace-pre-wrap rounded-2xl bg-cover text-center',
         className
       ),
       style: {

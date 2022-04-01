@@ -300,38 +300,40 @@ export default function Home() {
                 }}
               >
                 <Story
-                  markdown={`隱藏在黑暗力量的鑰匙啊，\n在我面前顯示你真正的力量！`}
                   width={255}
                   height={388}
-                  className='rounded-2xl bg-cover bg-center px-8 text-base'
+                  className='whitespace-pre-wrap rounded-2xl bg-cover bg-center px-8 text-base'
                   style={{
                     boxShadow: '0px 16px 32px rgba(255, 58, 94, 0.25)',
                     backgroundImage: 'url(/images/card_bg_sample.png)',
                   }}
-                />
+                >
+                  隱藏在黑暗力量的鑰匙啊， 在我面前顯示你真正的力量！
+                </Story>
 
                 <Story
-                  markdown={`隱藏在黑暗力量的鑰匙啊，\n在我面前顯示你真正的力量！`}
                   width={255}
                   height={388}
-                  className='rounded-2xl bg-cover bg-center px-8 text-base'
+                  className='whitespace-pre-wrap rounded-2xl bg-cover bg-center px-8 text-base'
                   style={{
                     boxShadow: '0px 16px 32px rgba(255, 58, 94, 0.25)',
                     transform: 'scale(0.8)',
                   }}
-                />
+                >
+                  隱藏在黑暗力量的鑰匙啊， 在我面前顯示你真正的力量！
+                </Story>
 
                 <Story
-                  markdown=''
                   width={255}
                   height={388}
-                  className='rounded-2xl bg-cover bg-center px-8 text-base'
+                  className='whitespace-pre-wrap rounded-2xl bg-cover bg-center px-8 text-base'
                   style={{
                     boxShadow: '0px 16px 32px rgba(255, 58, 94, 0.25)',
-                    opacity: 0.3,
                     transform: 'scale(0.8)',
                   }}
-                />
+                >
+                  隱藏在黑暗力量的鑰匙啊， 在我面前顯示你真正的力量！
+                </Story>
               </div>
             </div>
           </div>
