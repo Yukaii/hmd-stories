@@ -15,8 +15,7 @@ const getPosts = async (req: NextApiRequest, res: NextApiResponse) => {
     .select('*')
     .order('createdAt', {
       ascending: false,
-    })
-    .filter('createdAt', 'gt', 'yesterday');
+    });
 
   if (error) {
     res.status(500).json({

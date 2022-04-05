@@ -220,16 +220,15 @@ export default function Home() {
             {t('landing.subtitle')}
           </h3>
 
-          <a
-            style={textClipStyle}
-            className='mt-12 mb-20 cursor-pointer hover:underline'
-            href='https://hackmd.io/login'
-            target='_blank'
-            rel='noreferrer'
-          >
-            {t('landing.cta-1')}
-            <i className='fa fa-angle-right ml-0.5' aria-hidden='true' />
-          </a>
+          <Link href='/stories'>
+            <a
+              style={textClipStyle}
+              className='mt-12 mb-20 cursor-pointer hover:underline'
+            >
+              {t('landing.cta-1')}
+              <i className='fa fa-angle-right ml-0.5' aria-hidden='true' />
+            </a>
+          </Link>
         </div>
 
         <Image
@@ -415,20 +414,19 @@ export default function Home() {
 
           <p className='mb-8 text-xl'>{t('landing.section-3.subtitle')}</p>
 
-          <a
-            className='px-12 py-4'
-            style={{
-              background:
-                'linear-gradient(101.03deg, #FFD336 -4.74%, #FF208B 99.86%)',
-              boxShadow: '0px 12px 24px rgba(255, 94, 44, 0.32)',
-              borderRadius: 13,
-            }}
-            href='https://hackmd.io/login'
-            target='_blank'
-            rel='noreferrer'
-          >
-            {t('landing.section-3.cta')}
-          </a>
+          <Link href='/stories'>
+            <a
+              className='px-12 py-4'
+              style={{
+                background:
+                  'linear-gradient(101.03deg, #FFD336 -4.74%, #FF208B 99.86%)',
+                boxShadow: '0px 12px 24px rgba(255, 94, 44, 0.32)',
+                borderRadius: 13,
+              }}
+            >
+              {t('landing.section-3.cta')}
+            </a>
+          </Link>
         </div>
       </section>
 

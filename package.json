@@ -20,6 +20,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@heroicons/react": "^1.0.6",
     "@react-spring/web": "^9.4.4",
     "@supabase/postgrest-js": "^0.37.1",
     "@supabase/supabase-js": "^1.32.2",
