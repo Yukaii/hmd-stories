@@ -32,6 +32,11 @@ const createPost: NextApiHandler = async (
   req: NextApiRequest,
   res: NextApiResponse
 ) => {
+  return res.status(403).json({
+    error: 'Today is not the day',
+  });
+
+  /*
   const body: CreatePostPayload = req.body;
 
   const { userpath, content, variant } = body;
@@ -49,6 +54,7 @@ const createPost: NextApiHandler = async (
       error: 'Error creating post',
     });
   }
+  */
 };
 
 const handler: NextApiHandler = nc().use(cors).get(getPosts).post(createPost);
